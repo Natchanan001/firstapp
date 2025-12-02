@@ -12,10 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tui Shop',
       theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-      useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
       ),
-
       home: const MyHomePage(title: 'Pattama Shop'),
       debugShowCheckedModeBanner: false,
     );
@@ -31,13 +30,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //Control Data
+  // Control Data
   var price = TextEditingController();
   var amount = TextEditingController();
   var receive = TextEditingController();
 
   double _total = 0;
   double _change = 0;
+
+  // Widgets ---------------------------------------------
 
   Widget priceTextField() {
     return Padding(
@@ -98,7 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget showTotalText() {
-    return Text("Total : $_total Baht");
+    return Text(
+      _total == 0 ? "Total : Baht" : "Total : $_total Baht",
+    );
   }
 
   Widget changeCalculateButton() {
@@ -108,14 +111,12 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           if (receive.text.isNotEmpty) {
             if (double.parse(receive.text) < _total) {
-              //Not enough money
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text("Not enough money!")),
               );
             } else {
               setState(() {
-                _change =
-                    double.parse(receive.text) - _total;
+                _change = double.parse(receive.text) - _total;
               });
             }
           }
@@ -126,28 +127,65 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget showChangeText() {
-    return Text("Change : $_change Baht");
+    return Text(
+      _change == 0 ? "Change : Baht" : "Change : $_change Baht",
+    );
   }
 
+  // -------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+            fontFamily: 'maaja',
+            fontSize: 26,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
       ),
 
-      body: Column(
-        children: [
-          priceTextField(),
-          amountTextField(),
-          calculateButton(),
-          showTotalText(),
-          receiveMoneyTextField(),
-          changeCalculateButton(),
-          showChangeText(),
-        ],
+      // ⭐ Calculate แบบใหญ่ตามสไลด์!
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+
+          child: Column(
+            children: [
+      Container(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 244, 31, 31),   // สีพื้นหลังแดง
+            ),
+        child: const Text(
+          "Calculate",
+        style: TextStyle(
+       fontFamily: 'maaja',
+       fontSize: 48,
+       fontWeight: FontWeight.bold,
+       fontStyle: FontStyle.italic,
+       color: Colors.blue,     // ตัวหนังสือสีฟ้า
+         ),
+      ),
+    ),
+
+              const SizedBox(height: 20),
+
+              priceTextField(),
+              amountTextField(),
+              calculateButton(),
+              showTotalText(),
+              receiveMoneyTextField(),
+              changeCalculateButton(),
+              showChangeText(),
+            ],
+          ),
+        ),
       ),
     );
   }
