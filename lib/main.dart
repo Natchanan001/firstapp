@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Pattama Shop'),
+      home: const MyHomePage(title: 'Natchanan Shop'),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
 
-      // ⭐ Calculate แบบใหญ่ตามสไลด์!
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -158,22 +158,27 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
       Container(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 3),
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 244, 31, 31),   // สีพื้นหลังแดง
+            color: const Color.fromARGB(255, 244, 31, 31),  
             ),
         child: const Text(
           "Calculate",
         style: TextStyle(
        fontFamily: 'maaja',
-       fontSize: 48,
+       fontSize: 28,
        fontWeight: FontWeight.bold,
        fontStyle: FontStyle.italic,
-       color: Colors.blue,     // ตัวหนังสือสีฟ้า
+       color: Colors.blue, 
          ),
       ),
     ),
-
+   Center(
+      child: Image.asset(
+        "assets/delicious-ramen-with-chopsticks.jpg",
+        height: 200,
+      ),
+    ),
               const SizedBox(height: 20),
 
               priceTextField(),
