@@ -19,8 +19,6 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(fontSize: 28, fontFamily: "maaja"),
           ),
         ),
-        SizedBox(height: 20),
-        Icon(Icons.home, size: 150, color: Colors.blueAccent),
       ],
     );
   }
