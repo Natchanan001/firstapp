@@ -3,6 +3,7 @@ import 'pages/home.dart';
 import 'pages/calc.dart';
 import 'pages/contact.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tui Shop',
+      title: 'Natchanan Shop',
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
         useMaterial3: false

@@ -12,12 +12,17 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Details Page"),),
-        body: ListView(
-          children: const [
-            Text("Explanation Details")
+        title: const Text("Details"), 
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(20), 
+        children: const [
+          Text(
+            "Details Explanation", 
+            style: TextStyle(fontSize: 20),
+          ),
         ],
-    )
+      ),
     );
   }
 }
