@@ -13,30 +13,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Computer Knowledge"), 
+        title: const Text("Computer Knowledge"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20), 
-        child: ListView(
-          children: [
-            MyBox(
-              "What is a computer?", 
-              "Computer is a things to calculate and fo any other works", 
-              "https://cdn.pixabay.com/photo/2016/03/26/13/09/workspace-1280538_960_720.jpg"
-            ),
-            const SizedBox(height: 20), 
-            MyBox(
-              "What is Flutter?", 
-              "Flutter is a tool to create a mobile application", 
-              "https://cdn.pixabay.com/photo/2015/12/01/08/42/banner-1071789_960_720.jpg"
-            ),
-            const SizedBox(height: 20),
-MyBox(
-  "What is Dart?", 
-  "Dart is the language used in Flutter", 
-  "https://cdn.pixabay.com/photo/2018/05/08/08/44/artificial-intelligence-3382507_960_720.jpg" // ใช้ URL นี้แทน รันติดชัวร์!
-),
-          ],
+        padding: const EdgeInsets.all(20),
+        child: FutureBuilder(
+
+          future: DefaultAssetBundle.of(context).loadString('assets/data.json'),
+          builder: (context, snapshot) {
+            var data = json.decode(snapshot.data.toString());
+
+            return ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return MyBox(
+                  data[index]['title'],
+                  data[index]['subtitle'],
+                  data[index]['image_url']
+                );
+              },
+              itemCount: data == null ? 0 : data.length,
+            );
+          },
         ),
       ),
     );
