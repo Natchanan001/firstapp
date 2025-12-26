@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'details.dart'; 
+import 'details.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,53 +42,38 @@ class _HomePageState extends State<HomePage> {
 
   Widget MyBox(String title, String subtitle, String img_url) {
     return Container(
-      padding: const EdgeInsets.all(20), 
-      height: 180, 
+      margin: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.all(20),
+      height: 180,
       decoration: BoxDecoration(
-        color: Colors.blue[200], 
-        borderRadius: BorderRadius.circular(20), 
+        borderRadius: BorderRadius.circular(20),
         image: DecorationImage(
-          image: NetworkImage(img_url), 
-          fit: BoxFit.cover, 
+          image: NetworkImage(img_url),
+          fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.5), 
-            BlendMode.darken
-          ),
+              Colors.black.withOpacity(0.5), BlendMode.darken),
         ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start, 
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title, 
-            style: const TextStyle(
-              fontSize: 25, 
-              color: Colors.white, 
-              fontWeight: FontWeight.bold
-            ), 
+            title,
+            style: const TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10), 
+          const SizedBox(height: 10),
           Text(
-            subtitle, 
-            style: const TextStyle(
-              fontSize: 15, 
-              color: Colors.white
-            ), 
+            subtitle,
+            style: const TextStyle(fontSize: 15, color: Colors.white),
           ),
-          const Spacer(), 
+          const Spacer(),
           TextButton(
             onPressed: () {
-              print("next page >>"); 
               Navigator.push(
-                context, 
-                MaterialPageRoute(builder: (context) => const DetailsPage())
-              );
+                  context, MaterialPageRoute(builder: (context) => const DetailsPage()));
             },
-            child: const Text(
-              "read more", 
-              style: TextStyle(color: Colors.yellowAccent)
-            ), 
+            child: const Text("read more", style: TextStyle(color: Colors.yellowAccent)),
           )
         ],
       ),
