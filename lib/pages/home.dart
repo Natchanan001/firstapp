@@ -19,28 +19,31 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: FutureBuilder(
-
           future: DefaultAssetBundle.of(context).loadString('assets/data.json'),
           builder: (context, snapshot) {
-            var data = json.decode(snapshot.data.toString());
-
-            return ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return MyBox(
-                  data[index]['title'],
-                  data[index]['subtitle'],
-                  data[index]['image_url']
-                );
-              },
-              itemCount: data == null ? 0 : data.length,
-            );
+            if (snapshot.hasData) {
+              var data = json.decode(snapshot.data.toString());
+              return ListView.builder(
+                itemCount: data == null ? 0 : data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return MyBox(
+                    data[index]['title'],
+                    data[index]['subtitle'],
+                    data[index]['image_url'],
+                    data[index]['detail']
+                  );
+                },
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
           },
         ),
       ),
     );
   }
 
-  Widget MyBox(String title, String subtitle, String img_url) {
+  Widget MyBox(String title, String subtitle, String img_url, String detail) {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.all(20),
@@ -58,20 +61,18 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
-          ),
+          Text(title, style: const TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold)),
           const SizedBox(height: 10),
-          Text(
-            subtitle,
-            style: const TextStyle(fontSize: 15, color: Colors.white),
-          ),
+          Text(subtitle, style: const TextStyle(fontSize: 15, color: Colors.white)),
           const Spacer(),
           TextButton(
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const DetailsPage()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsPage(title, subtitle, img_url, detail)
+                ),
+              );
             },
             child: const Text("read more", style: TextStyle(color: Colors.yellowAccent)),
           )
