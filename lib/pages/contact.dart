@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'details.dart';
 
 class ContactPage extends StatefulWidget {
@@ -26,7 +25,7 @@ class _ContactPageState extends State<ContactPage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DetailsPage()),
+                  MaterialPageRoute(builder: (context) => DetailsPage(mydata[index], '', '', '')),
                 );
               },
             ); 
